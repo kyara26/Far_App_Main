@@ -1,0 +1,767 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition(duration=0.2)
+    LoadingPage:
+    HomeMenu:
+    FirstAidMenu1:
+    FirstAidMenu2:
+    CameraMenu:
+    BruisePage:
+    AbrasionPage:
+    BurnPage:
+    MinorWoundPage:
+    BleedingPage:
+    SprainPage:
+    AmbulanceMenu1:
+    AmbulanceMenu2:
+
+<LoadingPage>:
+    name: 'loadingpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'MobileAppBG.png'
+    
+    Image:
+        id: loading_image
+        size_hint: 0.2, 0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+
+<HomeMenu>:
+    name: 'homemenu'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png' 
+        
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu2.png' 
+            background_down: 'HomeMenu2.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png'
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+        
+        Image:
+            size_hint: 0.90, 0.2
+            pos_hint: {'center_x': 0.5,'center_y': 0.82}
+            source: 'HomeText.png'      
+        
+        Image:
+            id: clock_image
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.69} 
+            source: 'ClockBox.png' 
+
+        Label:
+            id: clock_label
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.69}
+            font_size: 45
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.46} #Change the Calendar
+            source: 'October.png' 
+        
+        Image:
+            size_hint: 0.90, 0.2
+            pos_hint: {'center_x': 0.5,'center_y': 0.2}
+            source: 'Hotlines.png'         
+
+<FirstAidMenu1>:
+    name: 'firstaidmenu1'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu2.png' 
+            background_down: 'FirstAidMenu2.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+    
+        Button:
+            text: '>'
+            size_hint: 0.120, 0.05
+            pos_hint: {'center_x': 0.5,'y': 0.093}
+            font_size: 15
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+            background_color:(1, 0, 0, 1)
+            halign: 'center'
+            valign: 'center'
+            on_release: app.root.current = 'firstaidmenu2'
+
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.78}
+            background_normal: 'Bruise.png' 
+            background_down: 'Bruise.png'    
+            on_release: app.root.current = 'bruisepage'
+
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.6}
+            background_normal: 'Abrasion.png' 
+            background_down: 'Abrasion.png'    
+            on_release: app.root.current = 'abrasionpage'
+        
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.42}
+            background_normal: 'Burn.png' 
+            background_down: 'Burn.png'    
+            on_release: app.root.current = 'burnpage'
+        
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.24}
+            background_normal: 'MinorWound.png' 
+            background_down: 'MinorWound.png'    
+            on_release: app.root.current = 'minorwoundpage'
+
+<FirstAidMenu2>:
+    name: 'firstaidmenu2'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu2.png'
+            background_down: 'FirstAidMenu2.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+    
+        Button:
+            text: '<'
+            size_hint: 0.120, 0.05
+            pos_hint: {'center_x': 0.5,'y': 0.093}
+            font_size: 15
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+            background_color:(1, 0, 0, 1)
+            halign: 'center'
+            valign: 'center'
+            on_release: app.root.current = 'firstaidmenu1'
+       
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.78}
+            background_normal: 'Bleeding.png' 
+            background_down: 'Bleeding.png'    
+            on_release: app.root.current = 'bleedingpage'
+        
+        Button:
+            size_hint: 0.90, 0.17
+            pos_hint: {'center_x': 0.5,'center_y': 0.6}
+            background_normal: 'Sprain.png' 
+            background_down: 'Sprain.png'    
+            on_release: app.root.current = 'sprainpage'
+
+<CameraMenu>:
+    name: 'cameramenu'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu2.png' 
+            background_down: 'CameraMenu2.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+        
+        Image:
+            size_hint: 0.90, 0.2
+            pos_hint: {'center_x': 0.5,'center_y': 0.84}
+            source: 'CameraText.png' 
+        
+        Button:
+            size_hint: 0.2, 0.1
+            pos_hint: {'center_x': 0.5,'center_y': 0.2}
+            background_normal: 'Camera.png' 
+            background_down: 'Camera.png'    #Under revision of the camera scanning
+            on_release: root.capture_image()
+        
+        Image:
+            id: camera_display
+            size_hint: 0.9, 20
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            
+<BruisePage>:
+    name: 'bruisepage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.81}
+            source: 'BruiseText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'BruiseMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'BruiseSubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'BruiseProcedure.png' 
+
+<AbrasionPage>:
+    name: 'abrasionpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.81}
+            source: 'AText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'AMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'ASubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'AProcedure.png' 
+
+<BurnPage>:
+    name: 'burnpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.81}
+            source: 'BurnText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'BurnMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'BurnSubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'BurnProcedure.png' 
+
+<MinorWoundPage>
+    name: 'minorwoundpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.82}
+            source: 'MWText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'MWMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'MWSubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'MWProcedure.png' 
+
+<BleedingPage>
+    name: 'bleedingpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.81}
+            source: 'BleedingText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'BleedingMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'BleedingSubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'BleedingProcedure.png' 
+
+<SprainPage>
+    name: 'sprainpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu1.png' 
+            background_down: 'AmbulanceMenu1.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.70, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.82}
+            source: 'SText.png'     
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.68}
+            source: 'SMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.52}
+            source: 'SSubMaterials.png' 
+        
+        Image:
+            size_hint: 0.90, 0.35
+            pos_hint: {'center_x': 0.5,'center_y': 0.27}
+            source: 'SProcedure.png' 
+
+<AmbulanceMenu1>
+    name: 'ambulancemenu1'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu2.png' 
+            background_down: 'AmbulanceMenu2.png'    
+            on_release: app.root.current = 'ambulancemenu1'
+        
+        Button:
+            text: '>'
+            size_hint: 0.120, 0.05
+            pos_hint: {'center_x': 0.5,'y': 0.093}
+            font_size: 15
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+            background_color:(1, 0, 0, 1)
+            halign: 'center'
+            valign: 'center'
+            on_release: app.root.current = 'ambulancemenu2' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.79}
+            source: 'AMHospital 1.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.65}
+            source: 'AMHospital 2.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.51}
+            source: 'AMHospital 3.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.37}
+            source: 'AMHospital 4.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.23}
+            source: 'AMHospital 5.png'
+        
+<AmbulanceMenu2>
+    name: 'ambulancemenu2'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'BG MAIN.png'
+    
+    FloatLayout:
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.05,'y': 0.0045}
+            background_normal: 'HomeMenu1.png' 
+            background_down: 'HomeMenu1.png'    
+            on_release: app.root.current = 'homemenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.27,'y': 0.0045}
+            background_normal: 'CameraMenu1.png' 
+            background_down: 'CameraMenu1.png'    
+            on_release: app.root.current = 'cameramenu'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.5,'y': 0.0045}
+            background_normal: 'FirstAidMenu1.png' 
+            background_down: 'FirstAidMenu1.png'    
+            on_release: app.root.current = 'firstaidmenu1'
+    
+        Button:
+            size_hint: 0.195, 0.07
+            pos_hint: {'x': 0.75,'y': 0.0045}
+            background_normal: 'AmbulanceMenu2.png' 
+            background_down: 'AmbulanceMenu2.png'    
+            on_release: app.root.current = 'ambulancemenu2'
+        
+        Button:
+            text: '<'
+            size_hint: 0.120, 0.05
+            pos_hint: {'center_x': 0.5,'y': 0.093}
+            font_size: 15
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+            background_color:(1, 0, 0, 1)
+            halign: 'center'
+            valign: 'center'
+            on_release: app.root.current = 'ambulancemenu1'
+
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.79}
+            source: 'AMHospital 6.png' 
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.65}
+            source: 'AMHospital 7.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.51}
+            source: 'AMHospital 8.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.37}
+            source: 'AMHospital 9.png'
+        
+        Image:
+            size_hint: 0.90, 0.16
+            pos_hint: {'center_x': 0.5,'center_y': 0.23}
+            source: 'AMHospital 10.png'         
