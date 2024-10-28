@@ -7,6 +7,7 @@ ScreenManagement:
     FirstAidMenu1:
     FirstAidMenu2:
     CameraMenu:
+    ProcessingPage:
     BruisePage:
     AbrasionPage:
     BurnPage:
@@ -274,16 +275,36 @@ ScreenManagement:
         
         Button:
             size_hint: 0.2, 0.1
-            pos_hint: {'center_x': 0.5,'center_y': 0.2}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
             background_normal: 'Camera.png' 
-            background_down: 'Camera.png'    #Under revision of the camera scanning
-            on_release: root.capture_image()
-        
+            background_down: 'Camera.png'    
+            on_release: root.capture_image()  # Capture image when button is pressed
+
         Image:
             id: camera_display
-            size_hint: 0.9, 20
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: 0.9, 0.9  # Adjusted size for better visibility
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the camera display
             
+<ProcessingPage>:
+    name: 'processingpage'
+    canvas.before:
+        Rectangle:
+            size:self.size
+            source: 'MobileAppLP.png'
+    
+    FloatLayout:
+        Button:
+            text: 'Back'
+            size_hint: 0.120, 0.05
+            pos_hint: {'center_x': 0.3,'center_y': 0.3}
+            font_size: 15
+            font_name: 'josefin-sans.bold.ttf'
+            color: (1, 1, 1)
+            background_color:(1, 0, 0, 1)
+            halign: 'center'
+            valign: 'center'
+            on_release: app.root.current = 'cameramenu'
+
 <BruisePage>:
     name: 'bruisepage'
     canvas.before:
