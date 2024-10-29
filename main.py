@@ -1,3 +1,4 @@
+
 import time
 import cv2
 import numpy as np
@@ -80,7 +81,7 @@ class CameraMenu(Screen):
         # Delay for processing effect
         Clock.schedule_once(lambda dt: self.navigate_to_page(injury_types), 2)
 
-    def detect_injury(self, image_path):
+    def detect_injury(self, image_path): #To be updated of training model
         # Replace with your Roboflow API URL and API Key
         project_name = "wound-assessment"  # Use your project ID here in lowercase, with dashes instead of spaces
         model_version = "2"  # Specify your model version (e.g., "2" for version 2)
@@ -99,7 +100,7 @@ class CameraMenu(Screen):
         # Check if the request was successful
         if response.status_code == 200:
             predictions = response.json()
-            print(predictions)  # Print the entire response to see its structure
+            #print(predictions)  # Print the entire response to see its structure
             # Process the predictions and return the wound types
             return self.process_predictions(predictions)
         else:
@@ -132,7 +133,7 @@ class CameraMenu(Screen):
                 print("Injury found: Burn detected with confidence", confidence)
             elif class_name == 'minor_wound' and confidence >= 0.5:
                 detected_injuries.append('minor_wound')
-                print("Injury found: Minor wound detected with confidence", confidence)
+                print("Injury found: Minor wound detected with confidence", confidence) #Cannot be detected
 
         if not detected_injuries:
             print("No recognized injury types in predictions.")
