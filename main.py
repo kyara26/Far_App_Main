@@ -76,9 +76,9 @@ class CameraMenu(Screen):
 
     def process_image(self, filename):
         # Send image to Roboflow API
-        injury_type = self.detect_injury(filename)
+        injury_types = self.detect_injury(filename)
         # Delay for processing effect
-        Clock.schedule_once(lambda dt: self.navigate_to_page(injury_type), 2)
+        Clock.schedule_once(lambda dt: self.navigate_to_page(injury_types), 2)
 
     def detect_injury(self, image_path):
         # Replace with your Roboflow API URL and API Key
@@ -100,48 +100,55 @@ class CameraMenu(Screen):
         if response.status_code == 200:
             predictions = response.json()
             print(predictions)  # Print the entire response to see its structure
-            # Process the predictions and return the wound type
+            # Process the predictions and return the wound types
             return self.process_predictions(predictions)
         else:
             print(f"Error: {response.status_code} - {response.text}")
             return None
 
-
-
     def process_predictions(self, predictions):
+        # Dictionary to track detected injuries
+        detected_injuries = []
+
         # Check if there are any predictions
         if not predictions['predictions']:
             print("No predictions found.")
-            return None  # Handle the case where no predictions were made
+            return detected_injuries  # Return an empty list if no predictions
 
-        # Assuming the predictions contain a list of detected objects
         # Iterate through the predictions
         for prediction in predictions['predictions']:
-            # Check if 'class' exists in the prediction
-            if 'class' in prediction:
-                if prediction['class'] == 'bruise':
-                    return 'bruise'
-                elif prediction['class'] == 'abrasion':
-                    return 'abrasion'
-                elif prediction['class'] == 'burn':
-                    return 'burn'
-                elif prediction['class'] == 'minor_wound':
-                    return 'minor_wound'
-        
-        print("No recognized injury types in predictions.")
-        return None
+            class_name = prediction['class'].lower() if 'class' in prediction else None
+            confidence = prediction['confidence'] if 'confidence' in prediction else 0
+            
+            # Adjust confidence thresholds as needed for different injuries
+            if class_name == 'bruise' and confidence >= 0.5:
+                detected_injuries.append('bruise')
+                print("Injury found: Bruise detected with confidence", confidence)
+            elif class_name == 'abrasion' and confidence >= 0.5:
+                detected_injuries.append('abrasion')
+                print("Injury found: Abrasion detected with confidence", confidence)
+            elif class_name == 'burn' and confidence >= 0.5:
+                detected_injuries.append('burn')
+                print("Injury found: Burn detected with confidence", confidence)
+            elif class_name == 'minor_wound' and confidence >= 0.5:
+                detected_injuries.append('minor_wound')
+                print("Injury found: Minor wound detected with confidence", confidence)
 
-    def navigate_to_page(self, injury_type):
-            if injury_type == 'bruise':
-                self.manager.current = 'bruisepage'
-            elif injury_type == 'abrasion':
-                self.manager.current = 'abrasionpage'
-            elif injury_type == 'burn':
-                self.manager.current = 'burnpage'
-            elif injury_type == 'minor_wound':
-                self.manager.current = 'minorwoundpage'
-            else:
-                print("No injury detected or unhandled injury type.")
+        if not detected_injuries:
+            print("No recognized injury types in predictions.")
+        return detected_injuries
+
+    def navigate_to_page(self, injury_types):
+        if 'bruise' in injury_types:
+            self.manager.current = 'bruisepage'
+        elif 'abrasion' in injury_types:
+            self.manager.current = 'abrasionpage'
+        elif 'burn' in injury_types:
+            self.manager.current = 'burnpage'
+        elif 'minor_wound' in injury_types:
+            self.manager.current = 'minorwoundpage'
+        else:
+            print("No injury detected or unhandled injury type.")
                 
 class ProcessingPage(Screen):
     def __init__(self, **kwargs):
@@ -177,10 +184,10 @@ class ScreenManagement(ScreenManager):
 class WindowManager(ScreenManager):
     pass
 
-file=Builder.load_file('FirstAidResponder.kv')
+file = Builder.load_file('FirstAidResponder.kv')
 
 class FirstAidApp(App):
-   def build(self):
+    def build(self):
         return file
     
 FirstAidApp().run()
