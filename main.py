@@ -82,54 +82,67 @@ class CameraMenu(Screen):
 
     def detect_injury(self, image_path):
         # Replace with your Roboflow API URL and API Key
-        roboflow_api_url = "https://app.roboflow.com/ds/CHdVWAj91b?key=p4ggSEPfjC"  # Example URL
-        api_key = "HKzDw2c2PwIEFAdzCWBC"  # Replace with your API key
-        project_name = "Wound Assessment 2"  # Replace with your project name
-        model_version = "v2"  # Replace with your model version
+        project_name = "wound-assessment"  # Use your project ID here in lowercase, with dashes instead of spaces
+        model_version = "2"  # Specify your model version (e.g., "2" for version 2)
+        api_key = "u20PAsYXkCCxa5vJtLEv"  # Replace with your actual API key
+
+        # Formulate the correct API endpoint URL
+        roboflow_api_url = f"https://outline.roboflow.com/{project_name}/{model_version}?api_key={api_key}"
 
         # Prepare the image for upload
         with open(image_path, 'rb') as img_file:
             response = requests.post(
-                f"{roboflow_api_url}/{project_name}/{model_version}/predict",
-                headers={"Authorization": f"Bearer {api_key}"},
+                roboflow_api_url,
                 files={"file": img_file}
             )
 
         # Check if the request was successful
         if response.status_code == 200:
             predictions = response.json()
+            print(predictions)  # Print the entire response to see its structure
             # Process the predictions and return the wound type
             return self.process_predictions(predictions)
         else:
             print(f"Error: {response.status_code} - {response.text}")
             return None
 
+
+
     def process_predictions(self, predictions):
+        # Check if there are any predictions
+        if not predictions['predictions']:
+            print("No predictions found.")
+            return None  # Handle the case where no predictions were made
+
         # Assuming the predictions contain a list of detected objects
-        # Adjust based on your model's output format
-        for prediction in predictions:
-            if prediction['class'] == 'bruise':
-                return 'bruise'
-            elif prediction['class'] == 'abrasion':
-                return 'abrasion'
-            elif prediction['class'] == 'burn':
-                return 'burn'
-            elif prediction['class'] == 'minor_wound':
-                return 'minor_wound'
+        # Iterate through the predictions
+        for prediction in predictions['predictions']:
+            # Check if 'class' exists in the prediction
+            if 'class' in prediction:
+                if prediction['class'] == 'bruise':
+                    return 'bruise'
+                elif prediction['class'] == 'abrasion':
+                    return 'abrasion'
+                elif prediction['class'] == 'burn':
+                    return 'burn'
+                elif prediction['class'] == 'minor_wound':
+                    return 'minor_wound'
+        
+        print("No recognized injury types in predictions.")
         return None
 
     def navigate_to_page(self, injury_type):
-        if injury_type == 'bruise':
-            self.manager.current = 'bruisepage'
-        elif injury_type == 'abrasion':
-            self.manager.current = 'abrasionpage'
-        elif injury_type == 'burn':
-            self.manager.current = 'burnpage'
-        elif injury_type == 'minor_wound':
-            self.manager.current = 'minorwoundpage'
-        else:
-            print("No injury detected or unhandled injury type.")
-            
+            if injury_type == 'bruise':
+                self.manager.current = 'bruisepage'
+            elif injury_type == 'abrasion':
+                self.manager.current = 'abrasionpage'
+            elif injury_type == 'burn':
+                self.manager.current = 'burnpage'
+            elif injury_type == 'minor_wound':
+                self.manager.current = 'minorwoundpage'
+            else:
+                print("No injury detected or unhandled injury type.")
+                
 class ProcessingPage(Screen):
     def __init__(self, **kwargs):
         super(ProcessingPage, self).__init__(**kwargs)
