@@ -1,8 +1,8 @@
-
 import time
 import cv2
 import numpy as np
 import requests
+import matplotlib.pyplot as plt
 from kivy.uix.popup import Popup
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -69,11 +69,30 @@ class CameraMenu(Screen):
             filename = f"captured_image/captured_image_{int(time.time())}.png"
             cv2.imwrite(filename, cv2.cvtColor(self.current_frame, cv2.COLOR_RGB2BGR))
 
+            # Apply histogram equalization
+            self.apply_histogram_equalization(filename)
+
             # Show processing page
             self.manager.current = 'processingpage'
             Clock.schedule_once(lambda dt: self.process_image(filename), 0)
         else:
             print("No current frame available.")
+
+    def apply_histogram_equalization(self, image_path):
+        # Load the captured image
+        image = cv2.imread(image_path)
+        
+        # Convert to grayscale
+        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+        # Apply histogram equalization
+        equalized_image = cv2.equalizeHist(gray_image)
+
+        # Save the equalized image
+        equalized_filename = f"captured_image/equalized_image_{int(time.time())}.png"
+        cv2.imwrite(equalized_filename, equalized_image)
+
+        print(f"Equalized image saved as: {equalized_filename}")
 
     def process_image(self, filename):
         # Send image to Roboflow API
@@ -81,7 +100,7 @@ class CameraMenu(Screen):
         # Delay for processing effect
         Clock.schedule_once(lambda dt: self.navigate_to_page(injury_types), 2)
 
-    def detect_injury(self, image_path): #To be updated of training model
+    def detect_injury(self, image_path):  # To be updated of training model
         # Replace with your Roboflow API URL and API Key
         project_name = "wound-assessment"  # Use your project ID here in lowercase, with dashes instead of spaces
         model_version = "2"  # Specify your model version (e.g., "2" for version 2)
