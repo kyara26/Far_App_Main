@@ -103,7 +103,7 @@ class CameraMenu(Screen):
     def detect_injury(self, image_path):  # To be updated of training model
         # Replace with your Roboflow API URL and API Key
         project_name = "wound-assessment"  # Use your project ID here in lowercase, with dashes instead of spaces
-        model_version = "2"  # Specify your model version (e.g., "2" for version 2)
+        model_version = "6"  # Specify your model version (e.g., "2" for version 2)
         api_key = "u20PAsYXkCCxa5vJtLEv"  # Replace with your actual API key
 
         # Formulate the correct API endpoint URL
@@ -119,7 +119,7 @@ class CameraMenu(Screen):
         # Check if the request was successful
         if response.status_code == 200:
             predictions = response.json()
-            #print(predictions)  # Print the entire response to see its structure
+            print(predictions)  # Print the entire response to see its structure
             # Process the predictions and return the wound types
             return self.process_predictions(predictions)
         else:
